@@ -1,7 +1,11 @@
-import { prisma } from '@/database/client'
+import Hero from '@/landing/components/hero'
 
 export default async function Home() {
-  const urls = await prisma.shortUrl.findMany()
-
-  return <div>{JSON.stringify(urls)}</div>
+  return (
+    <>
+      <section className='container grid items-center gap-6 pb-8 pt-6 md:py-10'>
+        <Hero />
+      </section>
+    </>
+  )
 }
