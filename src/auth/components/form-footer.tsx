@@ -6,7 +6,7 @@ interface Props {
   textRedirectTo: string
 }
 
-export function AuthFooter({ title, redirectTo, textRedirectTo }: Props) {
+export function FormFooter({ title, redirectTo, textRedirectTo }: Props) {
   return (
     <p className='px-8 text-center text-sm text-muted-foreground'>
       {title}

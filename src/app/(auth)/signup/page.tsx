@@ -1,54 +1,25 @@
-import { AuthFooter } from '@/auth/components/auth-footer'
+import { FormFooter } from '@/auth/components/form-footer'
+import { FormHeader } from '@/auth/components/form-header'
+import { FormWrapper } from '@/auth/components/form-wrapper'
 import { SocialLogin } from '@/auth/components/social-login'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { TypographyH1, TypographyH2 } from '@/components/ui/typography-H1'
-import Link from 'next/link'
+import { FormSeparator } from '@/auth/components/form-separator'
+import { SignUpForm } from '@/auth/components/signup/signup-form'
 
 export default function SignUpPage() {
   return (
-    <>
-      <section className='flex flex-col space-y-2 text-center mb-2'>
-        <TypographyH2 className=' font-semibold tracking-tight'>Create an account</TypographyH2>
-        <p className='text-sm text-muted-foreground'>Enter your information to create an account</p>
-      </section>
-
-      <form className='grid gap-4'>
-        <div className='grid gap-4'>
-          <Label>Name</Label>
-          <Input />
-        </div>
-        <div className='grid gap-4'>
-          <Label>Email</Label>
-          <Input />
-        </div>
-        <div className='grid gap-4'>
-          <Label>Password</Label>
-          <Input />
-        </div>
-        <Button
-          type='submit'
-          className='w-full'
-        >
-          Create Account
-        </Button>
-      </form>
-      <div className='relative'>
-        <div className='absolute inset-0 flex items-center'>
-          <Separator className='w-full' />
-        </div>
-        <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
-        </div>
-      </div>
+    <FormWrapper>
+      <FormHeader
+        title='Create an account'
+        description='Enter your information to create an account'
+      />
+      <SignUpForm />
+      <FormSeparator />
       <SocialLogin />
-      <AuthFooter
+      <FormFooter
         title='Already have an account?'
         redirectTo='/signin'
         textRedirectTo='Sign In'
       />
-    </>
+    </FormWrapper>
   )
 }
