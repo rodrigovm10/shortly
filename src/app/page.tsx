@@ -1,3 +1,7 @@
-export default function Home() {
-  return <div>hola</div>
+import { prisma } from '@/database/client'
+
+export default async function Home() {
+  const urls = await prisma.shortUrl.findMany()
+
+  return <div>{JSON.stringify(urls)}</div>
 }
