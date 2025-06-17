@@ -33,13 +33,15 @@ export function LoginCard() {
       <CardContent className='flex flex-col gap-4'>
         <LoginButton
           provider='google'
-          isPending={loadingProvider === 'google' && isPending}
           onClick={handleSignInWith}
+          disabled={loadingProvider === 'github'}
+          isPending={loadingProvider === 'google' && isPending}
         />
         <LoginButton
           provider='github'
-          isPending={loadingProvider === 'github' && isPending}
           onClick={handleSignInWith}
+          disabled={loadingProvider === 'google'}
+          isPending={loadingProvider === 'github' && isPending}
         />
       </CardContent>
     </Card>

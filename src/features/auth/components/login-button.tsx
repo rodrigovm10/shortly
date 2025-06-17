@@ -9,6 +9,7 @@ interface Props {
   provider: Provider
   isPending: boolean
   onClick: (provider: Provider) => void
+  disabled?: boolean
 }
 
 const providerIcons = {
@@ -26,13 +27,13 @@ const providerIcons = {
   ),
 }
 
-export function LoginButton({ provider, isPending, onClick }: Props) {
+export function LoginButton({ provider, isPending, onClick, disabled }: Props) {
   const label = `Continue with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`
   return (
     <Button
       variant='outline'
       onClick={() => onClick(provider)}
-      disabled={isPending}
+      disabled={disabled || isPending}
     >
       {isPending ? <Loader className='animate-spin' /> : providerIcons[provider]}
       <span>{label}</span>
