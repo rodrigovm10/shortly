@@ -1,9 +1,4 @@
-import {
-  TypographyH1,
-  TypographyH3,
-  TypographyH4,
-  TypographyP,
-} from '@/shared/components/typography'
+import { TypographyH1, TypographyP } from '@/shared/components/typography'
 
 export function Hero() {
   return (
