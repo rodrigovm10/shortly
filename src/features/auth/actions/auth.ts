@@ -15,7 +15,6 @@ export const signInWith = async (provider: 'github' | 'google') => {
     },
   })
 
-  console.log(data)
   if (error) console.log(error)
 
   if (data?.url) redirect(data.url)

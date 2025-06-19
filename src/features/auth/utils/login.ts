@@ -8,6 +8,4 @@ export async function signInWithGithub() {
       redirectTo: 'http://localhost:3000/auth/callback',
     },
   })
-
-  console.log('signInWithGithub', data, error)
 }

@@ -13,7 +13,6 @@ export function ShortenerCard() {
     const formData = new FormData(event.currentTarget)
     const url = formData.get('url') as string
     startTransition(() => {
-      console.log('Shortening URL...')
       setTimeout(() => {
         if (!url) {
           alert('Please enter a URL to shorten.')

@@ -6,8 +6,6 @@ export default async function Home() {
   const supabase = await createClient()
   const session = await supabase.auth.getUser()
 
-  console.log({ session })
-
   return (
     <main className='flex flex-col items-center gap-8'>
       <Hero />
