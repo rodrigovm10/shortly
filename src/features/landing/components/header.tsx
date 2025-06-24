@@ -5,10 +5,13 @@ import { SignOut } from '@/features/auth/components/sign-out'
 import { Logo } from '@/shared/components/logo'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
 import { buttonVariants } from '@/shared/components/ui/button'
+import { UserAvatar } from '@/features/dashboard/components/avatar'
+import { GithubLogo } from '@/shared/components/icons'
 
 export async function Header() {
   const supabase = await createClient()
-  const user = await supabase.auth.getUser()
+  const { data } = await supabase.auth.getUser()
+  const { user } = data
 
   return (
     <header className='flex items-center justify-between py-4 px-8 sm:px-24 border-b'>
@@ -23,10 +26,23 @@ export async function Header() {
           </span>
         </div>
       </Link>
-      <nav className='flex items-center gap-4'>
+      <nav className='flex items-center gap-2'>
+        <Link
+          href='https://github.com/rodrigovm10/shortly'
+          target='_blank'
+          className={buttonVariants({ variant: 'ghost' })}
+        >
+          <GithubLogo />
+        </Link>
         <ThemeToggle />
-        {user.data.user ? (
-          <SignOut />
+        {user ? (
+          <UserAvatar
+            user={{
+              name: user.user_metadata.name,
+              image: user?.user_metadata.avatar_url,
+              email: user?.email,
+            }}
+          />
         ) : (
           <Link
             href='/auth/login'

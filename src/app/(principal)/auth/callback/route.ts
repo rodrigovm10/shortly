@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   let next = searchParams.get('next') ?? '/'
   if (!next.startsWith('/')) {
     // if "next" is not a relative URL, use the default
-    next = '/'
+    next = '/dashboard'
   }
 
   if (code) {
