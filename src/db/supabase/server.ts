@@ -1,3 +1,5 @@
+'use server'
+
 import { EnvConfig } from '@/shared/config/envs'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
