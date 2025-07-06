@@ -2,6 +2,7 @@ import { retrieveLinks } from '../actions/retrieve-links'
 
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
 import { ChartNoAxesColumnIncreasing, Copy, Settings, Trash } from 'lucide-react'
+import { CopyLink } from './link-actions/copy-link'
 
 export async function ListLinks() {
   const [error, links] = await retrieveLinks()
@@ -28,8 +29,7 @@ export async function ListLinks() {
                   <span className='text-xs'>{link.clicks} clicks</span>
                   <ChartNoAxesColumnIncreasing size={14} />
                 </div>
-
-                <Copy size={14} />
+                <CopyLink link={link} />
                 <Settings size={14} />
                 <Trash size={14} />
               </section>
