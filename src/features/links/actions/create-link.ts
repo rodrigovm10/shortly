@@ -4,8 +4,6 @@ import { createClient } from '@/db/supabase/server'
 import { Database } from '@/shared/types/supabase'
 import { CreateLinkSchema } from '../schema/link'
 
-export type URL = Database['public']['Tables']['urls']['Row']
-
 export const createLink = async (
   link: CreateLinkSchema
 ): Promise<[error?: string, success?: string]> => {
