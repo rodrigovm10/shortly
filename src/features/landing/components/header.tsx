@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { createClient } from '@/db/supabase/server'
-import { SignOut } from '@/features/auth/components/sign-out'
 
 import { Logo } from '@/shared/components/logo'
 import { ThemeToggle } from '@/shared/components/theme-toggle'

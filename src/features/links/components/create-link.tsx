@@ -2,18 +2,11 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-})
+import { CreateLinkSchema, createLinkSchema } from '../schema/link'
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,28 +22,48 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
-import { Plus, Rocket } from 'lucide-react'
+import { Loader, Plus, Rocket } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
-import { Label } from '@/shared/components/ui/label'
+import { Textarea } from '@/shared/components/ui/textarea'
+import { useState, useTransition } from 'react'
+import { createLink } from '../actions/create-link'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export function CreateLink() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isPending, startTransition] = useTransition()
+  const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
+
+  const form = useForm<CreateLinkSchema>({
+    resolver: zodResolver(createLinkSchema),
     defaultValues: {
-      username: '',
+      shortLink: '',
+      originalUrl: '',
+      description: '',
     },
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  function onSubmit(values: CreateLinkSchema) {
+    startTransition(async () => {
+      const [error, success] = await createLink(values)
+
+      if (error) toast.error(error)
+      if (success) toast.success(success)
+
+      form.reset()
+      setIsOpen(false)
+
+      router.refresh()
+    })
   }
 
   return (
-    <Dialog>
+    <Dialog
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <DialogTrigger>
         <Button>
           <Plus />
@@ -69,55 +82,76 @@ export function CreateLink() {
           >
             <FormField
               control={form.control}
-              name='username'
+              name='originalUrl'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel className='font-semibold'>Destination URL:</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='shadcn'
+                      placeholder='https://'
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>This is your public display name.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type='submit'>Submit</Button>
+            <FormField
+              control={form.control}
+              name='shortLink'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='font-semibold'>Destination URL:</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='my link'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='description'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='font-semibold'>Description (optional):</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className='resize-none'
+                      placeholder='Enter a description'
+                      {...field}
+                      value={field.value ?? ''}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className='w-full flex gap-2 flex-col sm:flex-row'>
+              <Button
+                className='flex-1'
+                variant='outline'
+                disabled={isPending}
+                onClick={() => {
+                  setIsOpen(false)
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type='submit'
+                className='flex-1'
+                disabled={isPending}
+              >
+                {isPending ? <Loader className='animate-spin' /> : <Rocket />}
+                <span>{isPending ? 'Creating Link...' : 'Create Link'}</span>
+              </Button>
+            </div>
           </form>
         </Form>
-        <form className='space-y-6'>
-          <section className='flex flex-col gap-4'>
-            <div className='flex flex-col gap-2'>
-              <Label className='font-semibold'>Destination URL:</Label>
-              <Input placeholder='https://' />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label className='font-semibold'>Short link:</Label>
-              <Input placeholder='my link' />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label className='font-semibold'>Description (optional):</Label>
-              <Input placeholder='Enter a description' />
-            </div>
-          </section>
-          <div className='w-full flex gap-2'>
-            <Button
-              className='flex-1'
-              variant='outline'
-            >
-              Cancel
-            </Button>
-            <Button
-              type='submit'
-              className='flex-1'
-            >
-              <Rocket />
-              <span>Create Link</span>
-            </Button>
-          </div>
-        </form>
       </DialogContent>
     </Dialog>
   )

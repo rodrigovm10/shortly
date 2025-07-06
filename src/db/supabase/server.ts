@@ -4,10 +4,10 @@ import { EnvConfig } from '@/shared/config/envs'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
-export async function createClient() {
+export async function createClient<T>() {
   const cookieStore = await cookies()
 
-  return createServerClient(
+  return createServerClient<T>(
     EnvConfig().NEXT_PUBLIC_SUPABASE_URL!,
     EnvConfig().NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
