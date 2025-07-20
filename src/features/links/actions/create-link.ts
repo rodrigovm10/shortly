@@ -3,6 +3,7 @@
 import { createClient } from '@/db/supabase/server'
 import { Database } from '@/shared/types/supabase'
 import { CreateLinkSchema } from '../schema/link'
+import { revalidatePath } from 'next/cache'
 
 export const createLink = async (
   link: CreateLinkSchema
@@ -31,6 +32,8 @@ export const createLink = async (
   if (error) {
     return [error.message, undefined]
   }
+
+  revalidatePath('/dashboard/links')
 
   return [undefined, `Link created successfully: ${data.short_code}`]
 }

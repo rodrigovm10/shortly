@@ -44,7 +44,6 @@ export function CreateLink() {
     },
   })
 
-  // 2. Define a submit handler.
   function onSubmit(values: CreateLinkSchema) {
     startTransition(async () => {
       const [error, success] = await createLink(values)
@@ -54,8 +53,6 @@ export function CreateLink() {
 
       form.reset()
       setIsOpen(false)
-
-      router.refresh()
     })
   }
 
@@ -64,7 +61,7 @@ export function CreateLink() {
       open={isOpen}
       onOpenChange={setIsOpen}
     >
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>
           <Plus />
           <span>Create Link</span>
