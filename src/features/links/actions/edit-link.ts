@@ -3,15 +3,16 @@
 import { revalidatePath } from 'next/cache'
 import { Database } from '@/shared/types/supabase'
 import { createClient } from '@/db/supabase/server'
+import { EditLinkSchema } from '../schema/edit-link'
 import { checkUser } from '@/shared/utils/checkUser'
-import { CreateLinkSchema } from '../schema/create-link'
 
-export const createLink = async (
-  link: CreateLinkSchema
+export const editLink = async (
+  link: EditLinkSchema,
+  linkId: string
 ): Promise<[error?: string, success?: string]> => {
   const supabase = await createClient<Database>()
 
-  const [userError, userId] = await checkUser()
+  const [userError] = await checkUser()
 
   if (userError) {
     return [userError, undefined]
@@ -21,12 +22,12 @@ export const createLink = async (
 
   const { data, error } = await supabase
     .from('urls')
-    .insert({
-      short_code: shortLink,
+    .update({
       original_url: originalUrl,
-      description: description || '',
-      user_id: userId,
+      short_code: shortLink,
+      description: description,
     })
+    .eq('id', linkId)
     .select('*')
     .single()
 
@@ -36,5 +37,5 @@ export const createLink = async (
 
   revalidatePath('/dashboard/links')
 
-  return [undefined, `Link created successfully: ${data.short_code}`]
+  return [undefined, `Link updated successfully: ${data.short_code}`]
 }

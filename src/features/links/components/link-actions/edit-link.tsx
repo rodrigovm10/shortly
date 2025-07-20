@@ -1,8 +1,8 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
+import { Link } from '@/shared/types/database'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CreateLinkSchema, createLinkSchema } from '../schema/create-link'
 
 import {
   Form,
@@ -22,31 +22,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
-import { Loader, Plus, Rocket } from 'lucide-react'
+import { Loader, Plus, Rocket, Settings } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
 import { Textarea } from '@/shared/components/ui/textarea'
 import { useState, useTransition } from 'react'
-import { createLink } from '../actions/create-link'
 import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
+import { editLinkSchema, EditLinkSchema } from '../../schema/edit-link'
+import { editLink } from '../../actions/edit-link'
 
-export function CreateLink() {
+interface Props {
+  link: Link
+}
+
+export function EditLink({ link }: Props) {
   const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
 
-  const form = useForm<CreateLinkSchema>({
-    resolver: zodResolver(createLinkSchema),
+  const form = useForm<EditLinkSchema>({
+    resolver: zodResolver(editLinkSchema),
     defaultValues: {
-      shortLink: '',
-      originalUrl: '',
-      description: '',
+      shortLink: link.short_code ?? '',
+      originalUrl: link.original_url ?? '',
+      description: link.description ?? '',
     },
   })
 
-  function onSubmit(values: CreateLinkSchema) {
+  function onSubmit(values: EditLinkSchema) {
     startTransition(async () => {
-      const [error, success] = await createLink(values)
+      const [error, success] = await editLink(values, link.id)
 
       if (error) toast.error(error)
       if (success) toast.success(success)
@@ -61,15 +64,15 @@ export function CreateLink() {
       open={isOpen}
       onOpenChange={setIsOpen}
     >
-      <DialogTrigger asChild>
-        <Button>
-          <Plus />
-          <span>Create Link</span>
-        </Button>
+      <DialogTrigger
+        asChild
+        className='cursor-pointer'
+      >
+        <Settings size={14} />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new Link</DialogTitle>
+          <DialogTitle>Edit a Link</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
         <Form {...form}>

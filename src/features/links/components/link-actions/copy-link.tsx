@@ -2,11 +2,12 @@
 
 import { toast } from 'sonner'
 import { Copy } from 'lucide-react'
+import { Database } from '@/shared/types/supabase'
+
+type Link = Database['public']['Tables']['urls']['Row']
+
 interface Props {
-  link: {
-    short_code: string
-    original_url: string
-  }
+  link: Link
 }
 
 export function CopyLink({ link }: Props) {
