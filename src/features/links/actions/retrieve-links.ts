@@ -2,19 +2,19 @@
 
 import { Database } from '@/shared/types/supabase'
 import { createClient } from '@/db/supabase/server'
+import { checkUser } from '@/shared/utils/checkUser'
 
 export type URL = Database['public']['Tables']['urls']['Row']
 
 export const retrieveLinks = async (): Promise<[error?: string, result?: URL[]]> => {
   const supabase = await createClient<Database>()
 
-  const { data: user } = await supabase.auth.getUser()
+  const [userError, userId] = await checkUser()
 
-  if (!user) {
-    return ['User not authenticated', undefined]
+  if (userError) {
+    return [userError, undefined]
   }
-
-  const { data, error } = await supabase.from('urls').select('*').eq('user_id', user.user?.id!)
+  const { data, error } = await supabase.from('urls').select('*').eq('user_id', userId!)
 
   if (error) {
     return [error.message, undefined]
