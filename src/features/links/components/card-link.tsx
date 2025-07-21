@@ -1,10 +1,10 @@
 import { Link } from '@/shared/types/database'
 
+import { InfoLink } from './info-link'
 import { CopyLink } from './link-actions/copy-link'
+import { EditLink } from './link-actions/edit-link'
 import { DeleteLink } from './link-actions/delete-link'
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
-import { ChartNoAxesColumnIncreasing } from 'lucide-react'
-import { EditLink } from './link-actions/edit-link'
 
 interface Props {
   link: Link
@@ -21,17 +21,21 @@ export function CardLink({ link }: Props) {
           </h3>
           <p>{link.original_url}</p>
         </section>
-        <section className='flex gap-4 items-start'>
-          <div className='flex gap-2 items-start'>
-            <span className='text-xs'>{link.clicks} clicks</span>
-            <ChartNoAxesColumnIncreasing size={14} />
-          </div>
+        <section className='flex gap-4 items-start '>
+          <InfoLink
+            link={link}
+            className='hidden sm:flex'
+          />
           <CopyLink link={link} />
           <EditLink link={link} />
           <DeleteLink link={{ id: link.id, shortCode: link.short_code }} />
         </section>
       </CardContent>
-      <CardFooter className='flex justify-end'>
+      <CardFooter className='flex justify-between'>
+        <InfoLink
+          link={link}
+          className='sm:hidden '
+        />
         <span className='text-xs text-muted-foreground font-semibold'>
           {new Date(link.created_at).toLocaleDateString('en-US', {
             day: 'numeric',

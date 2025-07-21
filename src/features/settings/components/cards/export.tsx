@@ -1,6 +1,3 @@
-import { Download } from 'lucide-react'
-import { Label } from '@/shared/components/ui/label'
-import { Button } from '@/shared/components/ui/button'
 import { Separator } from '@/shared/components/ui/separator'
 import { Card, CardContent, CardDescription, CardTitle } from '@/shared/components/ui/card'
 import { ExportJSON } from './exports/export-json'
