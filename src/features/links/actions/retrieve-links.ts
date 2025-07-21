@@ -14,6 +14,7 @@ export const retrieveLinks = async (): Promise<[error?: string, result?: URL[]]>
   if (userError) {
     return [userError, undefined]
   }
+
   const { data, error } = await supabase.from('urls').select('*').eq('user_id', userId!)
 
   if (error) {
@@ -29,20 +30,42 @@ export const retrieveLinks = async (): Promise<[error?: string, result?: URL[]]>
 
 export const retrieveLinkById = async (linkId: string): Promise<[error?: string, result?: URL]> => {
   const supabase = await createClient<Database>()
+  const [userError, userId] = await checkUser()
 
-  const { data: user } = await supabase.auth.getUser()
-
-  if (!user) {
-    return ['User not authenticated', undefined]
+  if (userError) {
+    return [userError, undefined]
   }
 
   const { data, error } = await supabase
     .from('urls')
     .select('*')
-    .eq('user_id', user.user?.id!)
+    .eq('user_id', userId!)
     .eq('id', linkId)
     .single()
 
+  if (error) {
+    return [error.message, undefined]
+  }
+
+  if (!data) {
+    return ['No link found with the provided ID', undefined]
+  }
+
+  return [undefined, data]
+}
+
+export const retrieveLinkByShortCode = async (
+  shortCode: string
+): Promise<[error?: string, result?: URL]> => {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('urls')
+    .select('*')
+    .eq('short_code', shortCode)
+    .single()
+
+  console.log(error)
   if (error) {
     return [error.message, undefined]
   }
