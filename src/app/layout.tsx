@@ -1,17 +1,18 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/shared/components/theme-provider'
 import { Toaster } from 'sonner'
+import type { Metadata } from 'next'
+import { Geist, Space_Mono } from 'next/font/google'
+import { ThemeProvider } from '@/shared/components/theme-provider'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const geist = Geist({
   subsets: ['latin'],
+  variable: '--font-geist',
 })
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const spaceMono = Space_Mono({
+  variable: '--font-space-mono',
   subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
       lang='en'
       suppressHydrationWarning
     >
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
+      <body className={`${geist.variable} ${spaceMono.variable} antialiased `}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'

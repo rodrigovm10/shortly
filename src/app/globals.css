@@ -35,9 +35,6 @@
   --sidebar-accent-foreground: oklch(0.3353 0.0132 2.7676);
   --sidebar-border: oklch(0.9296 0.037 38.6868);
   --sidebar-ring: oklch(0.7357 0.1641 34.7091);
-  --font-sans: Montserrat, sans-serif;
-  --font-serif: Merriweather, serif;
-  --font-mono: Ubuntu Mono, monospace;
   --radius: 0.625rem;
   --shadow-2xs: 0px 6px 12px -3px hsl(0 0% 0% / 0.04);
   --shadow-xs: 0px 6px 12px -3px hsl(0 0% 0% / 0.04);
@@ -82,9 +79,6 @@
   --sidebar-accent-foreground: oklch(0.2569 0.0169 352.4042);
   --sidebar-border: oklch(0.3637 0.0203 342.2664);
   --sidebar-ring: oklch(0.7357 0.1641 34.7091);
-  --font-sans: Montserrat, sans-serif;
-  --font-serif: Merriweather, serif;
-  --font-mono: Ubuntu Mono, monospace;
   --radius: 0.625rem;
   --shadow-2xs: 0px 6px 12px -3px hsl(0 0% 0% / 0.04);
   --shadow-xs: 0px 6px 12px -3px hsl(0 0% 0% / 0.04);
@@ -130,9 +124,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --font-serif: var(--font-serif);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-space-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -151,6 +144,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply font-sans;
   }
   body {
     @apply bg-background text-foreground;
