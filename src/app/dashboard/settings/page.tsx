@@ -1,14 +1,9 @@
+import { redirect } from 'next/navigation'
 import { getUser } from '@/shared/actions/user'
 
-import { Label } from '@/shared/components/ui/label'
-import { Button } from '@/shared/components/ui/button'
-import { Separator } from '@/shared/components/ui/separator'
-import { Card, CardContent, CardDescription, CardTitle } from '@/shared/components/ui/card'
-import { Download, HeartCrack } from 'lucide-react'
+import { Export } from '@/features/settings/components/cards/export'
 import { General } from '@/features/settings/components/cards/general'
 import { Identities } from '@/features/settings/components/cards/identities'
-import { redirect } from 'next/navigation'
-import { Export } from '@/features/settings/components/cards/export'
 import { DangerZone } from '@/features/settings/components/cards/danger-zone'
 
 export default async function SettingsPage() {
