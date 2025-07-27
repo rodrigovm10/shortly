@@ -1,8 +1,12 @@
 'use client'
 
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { Link } from '@/shared/types/database'
+import { useState, useTransition } from 'react'
+import { editLink } from '../../actions/edit-link'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { editLinkSchema, EditLinkSchema } from '../../schema/edit-link'
 
 import {
   Form,
@@ -22,13 +26,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
-import { Loader, Plus, Rocket, Settings } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
+import { Loader, Rocket, Settings } from 'lucide-react'
 import { Textarea } from '@/shared/components/ui/textarea'
-import { useState, useTransition } from 'react'
-import { toast } from 'sonner'
-import { editLinkSchema, EditLinkSchema } from '../../schema/edit-link'
-import { editLink } from '../../actions/edit-link'
 
 interface Props {
   link: Link
@@ -51,7 +51,11 @@ export function EditLink({ link }: Props) {
     startTransition(async () => {
       const [error, success] = await editLink(values, link.id)
 
-      if (error) toast.error(error)
+      if (error) {
+        toast.error(error)
+        return
+      }
+
       if (success) toast.success(success)
 
       form.reset()
@@ -147,7 +151,7 @@ export function EditLink({ link }: Props) {
                 disabled={isPending}
               >
                 {isPending ? <Loader className='animate-spin' /> : <Rocket />}
-                <span>{isPending ? 'Creating Link...' : 'Create Link'}</span>
+                <span>{isPending ? 'Editing Link...' : 'Edit Link'}</span>
               </Button>
             </div>
           </form>

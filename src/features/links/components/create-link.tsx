@@ -1,6 +1,9 @@
 'use client'
 
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { createLink } from '../actions/create-link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreateLinkSchema, createLinkSchema } from '../schema/create-link'
 
@@ -12,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/components/ui/form'
-
 import { Button } from '@/shared/components/ui/button'
 import {
   Dialog,
@@ -25,15 +27,10 @@ import {
 import { Loader, Plus, Rocket } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
 import { Textarea } from '@/shared/components/ui/textarea'
-import { useState, useTransition } from 'react'
-import { createLink } from '../actions/create-link'
-import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 
 export function CreateLink() {
-  const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createLinkSchema),
@@ -48,7 +45,11 @@ export function CreateLink() {
     startTransition(async () => {
       const [error, success] = await createLink(values)
 
-      if (error) toast.error(error)
+      if (error) {
+        toast.error(error)
+        return
+      }
+
       if (success) toast.success(success)
 
       form.reset()
@@ -64,7 +65,7 @@ export function CreateLink() {
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          <span>Create Link</span>
+          <span className='hidden sm:block'>Create Link</span>
         </Button>
       </DialogTrigger>
       <DialogContent>

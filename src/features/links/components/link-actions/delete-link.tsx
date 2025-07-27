@@ -26,6 +26,7 @@ interface Props {
 export function DeleteLink({ link }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,7 +37,9 @@ export function DeleteLink({ link }: Props) {
       console.log('Confirmation:', confirmation)
 
       if (confirmation !== link.shortCode) {
-        toast.error('Short link does not match the short code.')
+        const errorText = 'Short link does not match the short code.'
+        setError(errorText)
+        toast.error(errorText)
         return
       }
 
@@ -81,19 +84,12 @@ export function DeleteLink({ link }: Props) {
           <Input
             id='confirmation'
             name='confirmation'
+            placeholder={link.shortCode}
+            className={error ? 'border-destructive' : ''}
           />
+          {error && <p className='text-destructive text-xs -mt-2 ml-1'>{error}</p>}
 
           <div className='w-full flex gap-2 flex-col sm:flex-row'>
-            <Button
-              className='flex-1'
-              variant='outline'
-              disabled={isPending}
-              onClick={() => {
-                setIsOpen(false)
-              }}
-            >
-              Cancel
-            </Button>
             <Button
               type='submit'
               className='flex-1'

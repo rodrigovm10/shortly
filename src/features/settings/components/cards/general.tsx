@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardTitle } from '@/shared/componen
 
 export function General({ user }: { user: User }) {
   return (
-    <Card>
+    <Card className='max-w-[500px]'>
       <CardTitle>General</CardTitle>
       <CardDescription className='px-6'>Look your information.</CardDescription>
       <Separator />
