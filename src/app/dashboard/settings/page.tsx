@@ -17,7 +17,7 @@ export default async function SettingsPage() {
     <div className='p-6 container'>
       <h1 className='text-2xl font-bold mb-4'>Account Settings</h1>
       <p className='text-gray-600'>Manage your account settings here.</p>
-      <section className='grid gap-8 mt-8'>
+      <section className='grid gap-8 mt-8 bg-amber-100'>
         <General user={user} />
         <Identities user={user} />
         <Export />

@@ -1,6 +1,4 @@
 import { Loader2 } from 'lucide-react'
-import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
-import { Skeleton } from '@/shared/components/ui/skeleton'
 
 export default function Loading() {
   return (
