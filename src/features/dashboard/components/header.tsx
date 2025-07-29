@@ -1,6 +1,7 @@
 import { getUser } from '@/shared/actions/user'
 import { UserAvatar } from './avatar'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
+import { Menu } from 'lucide-react'
 
 export async function Header() {
   const user = await getUser()

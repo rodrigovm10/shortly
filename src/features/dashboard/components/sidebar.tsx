@@ -13,7 +13,7 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className='group w-12 hover:w-52 transition-all duration-300 border-r overflow-hidden'>
+    <aside className='group w-12 hover:w-52 transition-all duration-300 border-r overflow-hidden md:block hidden'>
       <nav className='flex flex-col gap-2 p-2 items-center'>
         {items.map(({ href, label, icon: Icon }) => {
           const active = pathname === href

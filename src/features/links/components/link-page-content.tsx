@@ -11,6 +11,7 @@ import { buttonVariants } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 import { Boxes } from 'lucide-react'
 import { useLinkStore } from '../provider/link-provider'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 
 export type StatusFilter = 'ALL' | Status
 
@@ -42,11 +43,20 @@ export function LinkPageContent() {
           onFilter={handleSearchFilter}
           onSelect={handleSelectFilter}
         />
-        <div className='flex items-center gap-4'>
-          <span className={cn(buttonVariants({ variant: 'outline' }), 'text-xs')}>
-            <Boxes size={14} />
-            {links.length}/30
-          </span>
+        <div className='flex items-center gap-2'>
+          <Tooltip>
+            <TooltipTrigger>
+              <span
+                className={cn(buttonVariants({ variant: 'outline' }), 'text-xs hover:text-white')}
+              >
+                <Boxes size={14} />
+                {links.length}/30
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>You have {links.length} links. You can create up to 30 links.</p>
+            </TooltipContent>
+          </Tooltip>
           <CreateLink />
         </div>
       </section>
