@@ -1,10 +1,10 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { Database } from '@/shared/types/supabase'
 import { createClient } from '@/db/supabase/server'
 import { retrieveLinkById } from './retrieve-links'
 import { checkUser } from '@/shared/utils/checkUser'
+import { Database } from '../../../../database.types'
 
 export const deleteLink = async (
   linkId: string,

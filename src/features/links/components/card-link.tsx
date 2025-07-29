@@ -8,9 +8,10 @@ import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
 
 interface Props {
   link: Link
+  onDelete: (id: string) => void
 }
 
-export function CardLink({ link }: Props) {
+export function CardLink({ link, onDelete }: Props) {
   return (
     <Card key={link.id}>
       <CardContent className='flex justify-between '>

@@ -57,6 +57,7 @@ export type Database = {
           is_active: boolean
           original_url: string
           short_code: string
+          status: Database['public']['Enums']['status'] | null
           updated_at: string
           user_id: string | null
         }
@@ -68,6 +69,7 @@ export type Database = {
           is_active?: boolean
           original_url: string
           short_code: string
+          status?: Database['public']['Enums']['status'] | null
           updated_at?: string
           user_id?: string | null
         }
@@ -79,6 +81,7 @@ export type Database = {
           is_active?: boolean
           original_url?: string
           short_code?: string
+          status?: Database['public']['Enums']['status'] | null
           updated_at?: string
           user_id?: string | null
         }
@@ -100,7 +103,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      status: 'ACTIVE' | 'INACTIVE'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -228,6 +231,8 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      status: ['ACTIVE', 'INACTIVE'],
+    },
   },
 } as const

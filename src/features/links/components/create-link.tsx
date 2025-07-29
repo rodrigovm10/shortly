@@ -2,9 +2,11 @@
 
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
+import { useLinkStore } from '../store/link'
 import { useState, useTransition } from 'react'
 import { createLink } from '../actions/create-link'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { VariantProps } from 'class-variance-authority'
 import { CreateLinkSchema, createLinkSchema } from '../schema/create-link'
 
 import {
@@ -15,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/components/ui/form'
-import { Button } from '@/shared/components/ui/button'
+import { Button, buttonVariants } from '@/shared/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -28,9 +30,15 @@ import { Loader, Plus, Rocket } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
 import { Textarea } from '@/shared/components/ui/textarea'
 
-export function CreateLink() {
+interface Props {
+  variant?: VariantProps<typeof buttonVariants>
+  text?: string
+}
+
+export function CreateLink({ variant, text }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
+  const { createLink: createLinkStore } = useLinkStore().getState()
 
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createLinkSchema),
@@ -43,14 +51,17 @@ export function CreateLink() {
 
   function onSubmit(values: CreateLinkSchema) {
     startTransition(async () => {
-      const [error, success] = await createLink(values)
+      const [error, success, data] = await createLink(values)
 
       if (error) {
         toast.error(error)
         return
       }
 
-      if (success) toast.success(success)
+      if (success) {
+        toast.success(success)
+        createLinkStore(data!)
+      }
 
       form.reset()
       setIsOpen(false)
@@ -63,9 +74,9 @@ export function CreateLink() {
       onOpenChange={setIsOpen}
     >
       <DialogTrigger asChild>
-        <Button>
+        <Button variant={variant?.variant}>
           <Plus />
-          <span className='hidden sm:block'>Create Link</span>
+          <span className='hidden sm:block'>{text ?? 'Create Link'}</span>
         </Button>
       </DialogTrigger>
       <DialogContent>

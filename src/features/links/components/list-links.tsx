@@ -1,16 +1,14 @@
-import { retrieveLinks } from '../actions/retrieve-links'
 import { CardLink } from './card-link'
+import { Link } from '@/shared/types/database'
 
-export async function ListLinks() {
-  const [error, links] = await retrieveLinks()
+interface Props {
+  links: Link[]
+}
 
-  if (error) {
-    return <div className='text-red-500'>{error}</div>
-  }
-
+export function ListLinks({ links }: Props) {
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-      {links &&
+      {links.length > 0 &&
         links.map(link => (
           <CardLink
             key={link.id}

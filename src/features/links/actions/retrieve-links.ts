@@ -1,13 +1,12 @@
 'use server'
 
-import { Database } from '@/shared/types/supabase'
+import { Link } from '@/shared/types/database'
 import { createClient } from '@/db/supabase/server'
 import { checkUser } from '@/shared/utils/checkUser'
+import { Database } from '../../../../database.types'
 
-export type URL = Database['public']['Tables']['urls']['Row']
-
-export const retrieveLinks = async (): Promise<[error?: string, result?: URL[]]> => {
-  const supabase = await createClient<Database>()
+export const retrieveLinks = async (): Promise<[error?: string, result?: Link[]]> => {
+  const supabase = await createClient()
 
   const [userError, userId] = await checkUser()
 
@@ -21,14 +20,12 @@ export const retrieveLinks = async (): Promise<[error?: string, result?: URL[]]>
     return [error.message, undefined]
   }
 
-  if (data.length === 0) {
-    return ['No links found for this user', undefined]
-  }
-
   return [undefined, data]
 }
 
-export const retrieveLinkById = async (linkId: string): Promise<[error?: string, result?: URL]> => {
+export const retrieveLinkById = async (
+  linkId: string
+): Promise<[error?: string, result?: Link]> => {
   const supabase = await createClient<Database>()
   const [userError, userId] = await checkUser()
 
@@ -56,7 +53,7 @@ export const retrieveLinkById = async (linkId: string): Promise<[error?: string,
 
 export const retrieveLinkByShortCode = async (
   shortCode: string
-): Promise<[error?: string, result?: URL]> => {
+): Promise<[error?: string, result?: Link]> => {
   const supabase = await createClient()
 
   const { data, error } = await supabase

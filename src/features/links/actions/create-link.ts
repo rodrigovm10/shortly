@@ -1,14 +1,15 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { Database } from '@/shared/types/supabase'
+import { Link } from '@/shared/types/database'
 import { createClient } from '@/db/supabase/server'
 import { checkUser } from '@/shared/utils/checkUser'
+import { Database } from '../../../../database.types'
 import { CreateLinkSchema } from '../schema/create-link'
 
 export const createLink = async (
   link: CreateLinkSchema
-): Promise<[error?: string, success?: string]> => {
+): Promise<[error?: string, success?: string, data?: Link]> => {
   const supabase = await createClient<Database>()
 
   const [userError, userId] = await checkUser()
@@ -36,5 +37,5 @@ export const createLink = async (
 
   revalidatePath('/dashboard/links')
 
-  return [undefined, `Link created successfully: ${data.short_code}`]
+  return [undefined, `Link created successfully: ${data.short_code}`, data]
 }

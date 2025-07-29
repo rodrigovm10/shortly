@@ -1,5 +1,10 @@
 'use client'
 
+import { toast } from 'sonner'
+import { useLinkStore } from '../../store/link'
+import { useState, useTransition } from 'react'
+import { deleteLink } from '../../actions/delete-link'
+
 import { Button } from '@/shared/components/ui/button'
 import {
   Dialog,
@@ -9,12 +14,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
+import { Loader, Trash } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
-import { Loader, Trash } from 'lucide-react'
-import { useState, useTransition } from 'react'
-import { toast } from 'sonner'
-import { deleteLink } from '../../actions/delete-link'
 
 interface Props {
   link: {
@@ -27,6 +29,7 @@ export function DeleteLink({ link }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
+  const { deleteLink: deleteLinkStore } = useLinkStore().getState()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -54,6 +57,7 @@ export function DeleteLink({ link }: Props) {
         toast.success(success, {
           description: `The link /${link.shortCode} has been deleted.`,
         })
+        deleteLinkStore(link.id)
         setIsOpen(false)
       }
     })
