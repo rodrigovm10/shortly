@@ -28,12 +28,12 @@ export function Filters({ onFilter, onSelect }: Props) {
           <SelectItem value='INACTIVE'>Inactive</SelectItem>
         </SelectContent>
       </Select>
-      <Button variant='dot'>
+      {/* <Button variant='dot'>
         <Filter
           size={14}
           className='text-foreground'
         />
-      </Button>
+      </Button> */}
       <SearchLink onSearch={onFilter} />
     </div>
   )

@@ -1,7 +1,7 @@
 'use client'
 
 import { toast } from 'sonner'
-import { useLinkStore } from '../../store/link'
+import { useLinkStore } from '../../provider/link-provider'
 import { useState, useTransition } from 'react'
 import { deleteLink } from '../../actions/delete-link'
 
@@ -29,7 +29,7 @@ export function DeleteLink({ link }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  const { deleteLink: deleteLinkStore } = useLinkStore().getState()
+  const { deleteLink: deleteLinkStore } = useLinkStore(state => state)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

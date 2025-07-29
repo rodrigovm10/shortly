@@ -35,7 +35,7 @@ export const createLink = async (
     return [error.message, undefined]
   }
 
-  revalidatePath('/dashboard/links')
+  // revalidatePath('/dashboard/links')
 
   return [undefined, `Link created successfully: ${data.short_code}`, data]
 }

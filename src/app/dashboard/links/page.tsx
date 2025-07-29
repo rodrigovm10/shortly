@@ -1,5 +1,6 @@
 import { retrieveLinks } from '@/features/links/actions/retrieve-links'
 import { LinkPageContent } from '@/features/links/components/link-page-content'
+import { LinkStoreProvider } from '@/features/links/provider/link-provider'
 
 export default async function LinksPage() {
   const [error, links] = await retrieveLinks()
@@ -10,9 +11,11 @@ export default async function LinksPage() {
 
   return (
     <section>
-      <h1 className='text-2xl font-bold mb-4'>Links Page</h1>
-      <p className='text-gray-600'>This is the links page of the dashboard.</p>
-      <LinkPageContent initialLinks={links!} />
+      <LinkStoreProvider links={links!}>
+        <h1 className='text-2xl font-bold mb-4'>Links Page</h1>
+        <p className='text-gray-600'>This is the links page of the dashboard.</p>
+        <LinkPageContent />
+      </LinkStoreProvider>
     </section>
   )
 }

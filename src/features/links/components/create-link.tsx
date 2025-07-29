@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
-import { useLinkStore } from '../store/link'
+import { useLinkStore } from '../provider/link-provider'
 import { useState, useTransition } from 'react'
 import { createLink } from '../actions/create-link'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -38,7 +38,9 @@ interface Props {
 export function CreateLink({ variant, text }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
-  const { createLink: createLinkStore } = useLinkStore().getState()
+  const { createLink: createLinkStore, links } = useLinkStore(state => state)
+
+  console.log(links)
 
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createLinkSchema),

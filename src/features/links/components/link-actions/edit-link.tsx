@@ -56,7 +56,9 @@ export function EditLink({ link }: Props) {
         return
       }
 
-      if (success) toast.success(success)
+      if (success) {
+        toast.success(success)
+      }
 
       form.reset()
       setIsOpen(false)

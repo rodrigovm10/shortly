@@ -25,7 +25,7 @@ export function CardLink({ link, onDelete }: Props) {
         <section className='flex gap-4 items-start '>
           <InfoLink
             link={link}
-            className='hidden sm:flex'
+            className='hidden md:flex'
           />
           <CopyLink link={link} />
           <EditLink link={link} />
@@ -35,7 +35,7 @@ export function CardLink({ link, onDelete }: Props) {
       <CardFooter className='flex justify-between'>
         <InfoLink
           link={link}
-          className='sm:hidden '
+          className='md:hidden '
         />
         <span className='text-xs text-muted-foreground font-semibold'>
           {new Date(link.created_at).toLocaleDateString('en-US', {
