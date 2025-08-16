@@ -37,7 +37,6 @@ export function DeleteLink({ link }: Props) {
     startTransition(async () => {
       const formData = new FormData(e.currentTarget)
       const confirmation = formData.get('confirmation') as string
-      console.log('Confirmation:', confirmation)
 
       if (confirmation !== link.shortCode) {
         const errorText = 'Short link does not match the short code.'

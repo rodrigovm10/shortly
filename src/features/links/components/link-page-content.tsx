@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { Boxes } from 'lucide-react'
+import { cn } from '@/shared/lib/utils'
 import { Link, Status } from '@/shared/types/database'
 
 import { NoFoundLinks } from './no-found-links'
@@ -8,8 +10,6 @@ import { ListLinks } from '@/features/links/components/list-links'
 import { CreateLink } from '@/features/links/components/create-link'
 import { Filters } from '@/features/links/components/filters/filters'
 import { buttonVariants } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
-import { Boxes } from 'lucide-react'
 import { useLinkStore } from '../provider/link-provider'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 

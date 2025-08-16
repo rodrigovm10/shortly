@@ -38,9 +38,7 @@ interface Props {
 export function CreateLink({ variant, text }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
-  const { createLink: createLinkStore, links } = useLinkStore(state => state)
-
-  console.log(links)
+  const { createLink: createLinkStore } = useLinkStore(state => state)
 
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createLinkSchema),

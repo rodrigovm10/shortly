@@ -29,6 +29,7 @@ import {
 import { Input } from '@/shared/components/ui/input'
 import { Loader, Rocket, Settings } from 'lucide-react'
 import { Textarea } from '@/shared/components/ui/textarea'
+import { useLinkStore } from '../../provider/link-provider'
 
 interface Props {
   link: Link
@@ -37,6 +38,7 @@ interface Props {
 export function EditLink({ link }: Props) {
   const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
+  const { updateLink } = useLinkStore(state => state)
 
   const form = useForm<EditLinkSchema>({
     resolver: zodResolver(editLinkSchema),
@@ -58,6 +60,7 @@ export function EditLink({ link }: Props) {
 
       if (success) {
         toast.success(success)
+        updateLink(link.id, values)
       }
 
       form.reset()
