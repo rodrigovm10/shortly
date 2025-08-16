@@ -1,4 +1,3 @@
-import { Filter } from 'lucide-react'
 import {
   Select,
   SelectContent,
@@ -7,15 +6,14 @@ import {
   SelectValue,
 } from '@/shared/components/ui/select'
 import { StatusFilter } from '../link-page-content'
-import { Button } from '@/shared/components/ui/button'
 import { SearchLink } from '@/features/links/components/filters/search-link'
 
 interface Props {
-  onFilter: (search: string) => void
+  onSearch: (search: string) => void
   onSelect: (status: StatusFilter) => void
 }
 
-export function Filters({ onFilter, onSelect }: Props) {
+export function Filters({ onSearch, onSelect }: Props) {
   return (
     <div className='flex items-center gap-2'>
       <Select onValueChange={onSelect}>
@@ -28,7 +26,7 @@ export function Filters({ onFilter, onSelect }: Props) {
           <SelectItem value='INACTIVE'>Inactive</SelectItem>
         </SelectContent>
       </Select>
-      <SearchLink onSearch={onFilter} />
+      <SearchLink onSearch={onSearch} />
     </div>
   )
 }

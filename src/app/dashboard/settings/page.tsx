@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { getUser } from '@/shared/actions/user'
 
@@ -5,6 +6,11 @@ import { Export } from '@/features/settings/components/cards/export'
 import { General } from '@/features/settings/components/cards/general'
 import { Identities } from '@/features/settings/components/cards/identities'
 import { DangerZone } from '@/features/settings/components/cards/danger-zone'
+
+export const metadata: Metadata = {
+  title: 'Shortly - Settings',
+  description: 'Settings for the account',
+}
 
 export default async function SettingsPage() {
   const user = await getUser()

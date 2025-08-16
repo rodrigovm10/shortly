@@ -16,31 +16,21 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/
 export type StatusFilter = 'ALL' | Status
 
 export function LinkPageContent() {
-  const { links } = useLinkStore(state => state)
-
-  const [filteredLinks, setFilteredLinks] = useState<Link[]>(links)
+  const { links, searchLink, selectLink } = useLinkStore(state => state)
 
   const handleSearchFilter = (search: string) => {
-    const filtered = links.filter(link => link.short_code.includes(search))
-
-    setFilteredLinks(filtered)
+    searchLink(search)
   }
 
   const handleSelectFilter = (filter: StatusFilter) => {
-    if (filter === 'ALL') {
-      setFilteredLinks(links)
-      return
-    }
-
-    const filtered = links.filter(link => link.status === filter)
-    setFilteredLinks(filtered)
+    selectLink(filter)
   }
 
   return (
     <>
       <section className='flex items-center justify-between gap-2 mb-4'>
         <Filters
-          onFilter={handleSearchFilter}
+          onSearch={handleSearchFilter}
           onSelect={handleSelectFilter}
         />
         <div className='flex items-center gap-2'>
@@ -60,7 +50,7 @@ export function LinkPageContent() {
           <CreateLink />
         </div>
       </section>
-      {filteredLinks && filteredLinks.length > 0 ? <ListLinks links={links} /> : <NoFoundLinks />}
+      {links.length > 0 ? <ListLinks links={links} /> : <NoFoundLinks />}
     </>
   )
 }
