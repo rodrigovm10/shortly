@@ -1,4 +1,4 @@
-import { Link } from 'lucide-react'
+import { Link2 } from 'lucide-react'
 
 interface Props {
   size?: number
@@ -7,8 +7,8 @@ interface Props {
 export function Logo({ size = 14 }: Props) {
   return (
     <div className='bg-primary text-black p-2 rounded-xl'>
-      <Link
-        className='text-white dark:text-black group-hover:rotate-45 transition-transform duration-300'
+      <Link2
+        className='text-white dark:text-black group-hover:-rotate-45 transition-transform duration-300'
         size={size}
       />
     </div>

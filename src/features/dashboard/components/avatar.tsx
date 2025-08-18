@@ -70,16 +70,21 @@ export function UserAvatar({ user }: Props) {
             <span>Settings</span>
           </DropdownMenuItem>
         </Link>
+        <Link
+          href='https://github.com/rodrigovm10/shortly/issues'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <DropdownMenuItem className='cursor-pointer'>
+            <Bug />
+            <span>Report a Bug</span>
+          </DropdownMenuItem>
+        </Link>
 
-        <DropdownMenuItem className='cursor-pointer'>
-          <Bug />
-          <span>Report a Bug</span>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem className='cursor-pointer'>
+        {/* <DropdownMenuItem className='cursor-pointer'>
           <CircleUserRound />
           Contact
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='cursor-pointer'

@@ -1,6 +1,8 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import { UserAvatar } from './avatar'
+
 import { getUser } from '@/shared/actions/user'
+import { Logo } from '@/shared/components/logo'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
 
 export async function Header() {
@@ -8,15 +10,17 @@ export async function Header() {
 
   return (
     <header className='h-16 flex items-center justify-between px-6 border-b'>
-      <h1 className='text-lg sm:text-xl font-bold flex items-center gap-2'>
-        <Image
-          src='/logo.png'
-          alt='shortly logo'
-          width={16}
-          height={16}
-        />
-        <span>shortly</span>{' '}
-      </h1>
+      <Link
+        href='/'
+        className='group'
+      >
+        <div className='flex items-center font-bold justify-center gap-2'>
+          <Logo />{' '}
+          <span className='text-xl font-bold'>
+            Short<span className='text-primary'>ly</span>
+          </span>
+        </div>
+      </Link>
       <nav className='flex items-center gap-4'>
         <ThemeToggle />
         <UserAvatar

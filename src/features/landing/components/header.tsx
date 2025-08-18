@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { createClient } from '@/db/supabase/server'
 
 import { Logo } from '@/shared/components/logo'
-import { ThemeToggle } from '@/shared/components/theme-toggle'
-import { buttonVariants } from '@/shared/components/ui/button'
-import { UserAvatar } from '@/features/dashboard/components/avatar'
 import { GithubLogo } from '@/shared/components/icons'
+import { buttonVariants } from '@/shared/components/ui/button'
+import { ThemeToggle } from '@/shared/components/theme-toggle'
+import { UserAvatar } from '@/features/dashboard/components/avatar'
 
 export async function Header() {
   const supabase = await createClient()
@@ -20,7 +20,7 @@ export async function Header() {
       >
         <div className='flex items-center font-bold justify-center gap-2'>
           <Logo />{' '}
-          <span className='text-2xl font-bold'>
+          <span className='text-xl font-bold'>
             Short<span className='text-primary'>ly</span>
           </span>
         </div>
