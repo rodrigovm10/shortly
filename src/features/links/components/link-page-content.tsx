@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import { Boxes } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
-import { Link, Status } from '@/shared/types/database'
+import { Status } from '@/shared/types/database'
+import { MAX_LINKS } from '../utils/constants'
 
 import { NoFoundLinks } from './no-found-links'
 import { ListLinks } from '@/features/links/components/list-links'
@@ -40,7 +40,7 @@ export function LinkPageContent() {
                 className={cn(buttonVariants({ variant: 'outline' }), 'text-xs hover:text-white')}
               >
                 <Boxes size={14} />
-                {links.length}/30
+                {links.length}/{MAX_LINKS}
               </span>
             </TooltipTrigger>
             <TooltipContent>

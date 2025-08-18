@@ -43,7 +43,6 @@ export function CreateLink({ variant, text }: Props) {
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createLinkSchema),
     defaultValues: {
-      shortLink: '',
       originalUrl: '',
       description: '',
     },
@@ -98,22 +97,6 @@ export function CreateLink({ variant, text }: Props) {
                   <FormControl>
                     <Input
                       placeholder='https://'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='shortLink'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className='font-semibold'>Destination URL:</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='my link'
                       {...field}
                     />
                   </FormControl>

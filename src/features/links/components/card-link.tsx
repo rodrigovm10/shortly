@@ -4,6 +4,7 @@ import { InfoLink } from './info-link'
 import { CopyLink } from './link-actions/copy-link'
 import { EditLink } from './link-actions/edit-link'
 import { DeleteLink } from './link-actions/delete-link'
+import { CopyLinkShortCode } from './copy-link-short-code'
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
 
 interface Props {
@@ -15,11 +16,8 @@ export function CardLink({ link }: Props) {
     <Card key={link.id}>
       <CardContent className='flex justify-between '>
         <section className=''>
-          <h3 className='font-bold'>
-            <span className='opacity-70'>/</span>
-            {link.short_code}
-          </h3>
-          <p>{link.original_url}</p>
+          <CopyLinkShortCode link={link} />
+          <p className='text-sm text-muted-foreground font-bold'>{link.original_url}</p>
         </section>
         <section className='flex gap-4 items-start '>
           <InfoLink

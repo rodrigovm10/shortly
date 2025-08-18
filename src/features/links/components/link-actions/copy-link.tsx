@@ -1,10 +1,8 @@
 'use client'
 
-import { toast } from 'sonner'
 import { Copy } from 'lucide-react'
-import { Database } from '@/shared/types/supabase'
-
-type Link = Database['public']['Tables']['urls']['Row']
+import { Link } from '@/shared/types/database'
+import { copyLink } from '../../utils/copy-link'
 
 interface Props {
   link: Link
@@ -12,12 +10,7 @@ interface Props {
 
 export function CopyLink({ link }: Props) {
   const handleCopy = () => {
-    const urlCopy = `${window.location.origin}/${link.short_code}`
-
-    navigator.clipboard.writeText(urlCopy)
-    toast.success('Link copied to clipboard!', {
-      description: `Short link: ${urlCopy}`,
-    })
+    copyLink(link)
   }
 
   return (
