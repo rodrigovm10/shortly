@@ -1,14 +1,22 @@
-import { getUser } from '@/shared/actions/user'
+import Image from 'next/image'
 import { UserAvatar } from './avatar'
+import { getUser } from '@/shared/actions/user'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
-import { Menu } from 'lucide-react'
 
 export async function Header() {
   const user = await getUser()
 
   return (
     <header className='h-16 flex items-center justify-between px-6 border-b'>
-      <h1 className='text-xl font-bold'>shortly</h1>
+      <h1 className='text-lg sm:text-xl font-bold flex items-center gap-2'>
+        <Image
+          src='/logo.png'
+          alt='shortly logo'
+          width={16}
+          height={16}
+        />
+        <span>shortly</span>{' '}
+      </h1>
       <nav className='flex items-center gap-4'>
         <ThemeToggle />
         <UserAvatar

@@ -7,7 +7,7 @@ export function Export() {
     <Card>
       <CardTitle>Export Your Links</CardTitle>
       <Separator />
-      <CardDescription className='px-6'>
+      <CardDescription>
         You can export all the links you have saved in your account.
       </CardDescription>
       <CardContent className='space-y-4'>

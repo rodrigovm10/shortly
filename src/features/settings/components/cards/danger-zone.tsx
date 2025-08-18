@@ -36,13 +36,13 @@ export function DangerZone() {
     <Card>
       <CardTitle>Danger zone</CardTitle>
       <Separator />
-      <CardDescription className='px-6'>
+      <CardDescription>
         Deleting your account is permanent and cannot be undone. All your data will be deleted.
       </CardDescription>
       <CardContent className='space-y-4'>
         <Button
           variant='destructive'
-          className='font-semibold'
+          className='font-semibold w-full sm:w-auto h-10 sm:h-9'
           disabled={isPending}
           onClick={handleDeleteAccount}
         >

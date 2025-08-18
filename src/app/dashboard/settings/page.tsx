@@ -6,6 +6,7 @@ import { Export } from '@/features/settings/components/cards/export'
 import { General } from '@/features/settings/components/cards/general'
 import { Identities } from '@/features/settings/components/cards/identities'
 import { DangerZone } from '@/features/settings/components/cards/danger-zone'
+import { TitleDescription } from '@/shared/components/title-description'
 
 export const metadata: Metadata = {
   title: 'Shortly - Settings',
@@ -20,10 +21,12 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className='p-6 container'>
-      <h1 className='text-2xl font-bold mb-4'>Account Settings</h1>
-      <p className='text-gray-600'>Manage your account settings here.</p>
-      <section className='grid gap-8 mt-8 bg-amber-100'>
+    <div className='container '>
+      <TitleDescription
+        title='Account Settings'
+        description='Manage your account settings here.'
+      />
+      <section className='grid gap-3 sm:gap-4 lg:gap-6'>
         <General user={user} />
         <Identities user={user} />
         <Export />

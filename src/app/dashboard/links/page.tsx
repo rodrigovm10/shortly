@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
-import { LinkPageContent } from '@/features/links/components/link-page-content'
-import { LinkStoreProvider } from '@/features/links/provider/link-provider'
 import { retrieveLinks } from '@/features/links/actions/retrieve-links'
+import { TitleDescription } from '@/shared/components/title-description'
+import { LinkStoreProvider } from '@/features/links/provider/link-provider'
+import { LinkPageContent } from '@/features/links/components/link-page-content'
 
 export const metadata: Metadata = {
   title: 'Shortly - Dashboard',
@@ -18,8 +19,10 @@ export default async function LinksPage() {
   return (
     <section>
       <LinkStoreProvider links={links!}>
-        <h1 className='text-2xl font-bold mb-4'>Links Page</h1>
-        <p className='text-gray-600'>This is the links page of the dashboard.</p>
+        <TitleDescription
+          title='Links Page'
+          description='This is the links page of the dashboard.'
+        />
         <LinkPageContent />
       </LinkStoreProvider>
     </section>
