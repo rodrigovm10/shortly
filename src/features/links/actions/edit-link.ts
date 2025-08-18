@@ -1,16 +1,14 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { createClient } from '@/db/supabase/server'
 import { EditLinkSchema } from '../schema/edit-link'
 import { checkUser } from '@/shared/utils/checkUser'
-import { Database } from '../../../../database.types'
 
 export const editLink = async (
   link: EditLinkSchema,
   linkId: string
 ): Promise<[error?: string, success?: string]> => {
-  const supabase = await createClient<Database>()
+  const supabase = await createClient()
 
   const [userError] = await checkUser()
 

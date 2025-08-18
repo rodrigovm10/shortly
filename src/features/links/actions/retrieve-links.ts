@@ -3,7 +3,6 @@
 import { Link } from '@/shared/types/database'
 import { createClient } from '@/db/supabase/server'
 import { checkUser } from '@/shared/utils/checkUser'
-import { Database } from '../../../../database.types'
 
 export const retrieveLinks = async (): Promise<[error?: string, result?: Link[]]> => {
   const supabase = await createClient()
@@ -26,7 +25,7 @@ export const retrieveLinks = async (): Promise<[error?: string, result?: Link[]]
 export const retrieveLinkById = async (
   linkId: string
 ): Promise<[error?: string, result?: Link]> => {
-  const supabase = await createClient<Database>()
+  const supabase = await createClient()
   const [userError, userId] = await checkUser()
 
   if (userError) {
