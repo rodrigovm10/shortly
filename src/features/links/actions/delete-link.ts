@@ -4,13 +4,12 @@ import { revalidatePath } from 'next/cache'
 import { createClient } from '@/db/supabase/server'
 import { retrieveLinkById } from './retrieve-links'
 import { checkUser } from '@/shared/utils/checkUser'
-import { Database } from '../../../../database.types'
 
 export const deleteLink = async (
   linkId: string,
   shortCode: string
 ): Promise<[error?: string, result?: string]> => {
-  const supabase = await createClient<Database>()
+  const supabase = await createClient()
 
   const [userError, userId] = await checkUser()
 

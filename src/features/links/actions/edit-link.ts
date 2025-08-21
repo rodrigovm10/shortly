@@ -33,7 +33,5 @@ export const editLink = async (
     return [error.message, undefined]
   }
 
-  // revalidatePath('/dashboard/links')
-
   return [undefined, `Link updated successfully: ${data.short_code}`]
 }

@@ -1,8 +1,9 @@
-import { Database } from '../types/supabase'
+'use server'
+
 import { createClient } from '@/db/supabase/server'
 
 export const checkUser = async (): Promise<[error?: string, userId?: string]> => {
-  const supabase = await createClient<Database>()
+  const supabase = await createClient()
 
   const { data: user } = await supabase.auth.getUser()
 
