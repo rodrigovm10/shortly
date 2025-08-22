@@ -1,4 +1,4 @@
-import { Star, Stars } from 'lucide-react'
+import { Stars } from 'lucide-react'
 import { CreateLink } from './create-link'
 
 export function NoFoundLinks() {

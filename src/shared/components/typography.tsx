@@ -85,7 +85,7 @@ export const TypographyListUl = forwardRef<HTMLUListElement, React.ComponentProp
 
 TypographyListUl.displayName = 'TypographyListUl'
 
-export const TypographyListOl = forwardRef<HTMLOListElement, React.ComponentPropsWithoutRef<'ol'>>(
+export const TypographyListOL = forwardRef<HTMLOListElement, React.ComponentPropsWithoutRef<'ol'>>(
   ({ className, ...props }, ref) => {
     return (
       <ol
@@ -96,3 +96,5 @@ export const TypographyListOl = forwardRef<HTMLOListElement, React.ComponentProp
     )
   }
 )
+
+TypographyListOL.displayName = 'TypographyListOL'

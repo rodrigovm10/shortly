@@ -1,18 +1,18 @@
 'use client'
 
 import { toast } from 'sonner'
-import { useTransition, useState } from 'react'
 import { Rocket } from 'lucide-react'
+import { useTransition, useState } from 'react'
 import { EnvConfig } from '@/shared/config/envs'
 
-import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
+import { Button } from '@/shared/components/ui/button'
 
 export function ShortenerCard() {
   const [isShorting, startTransition] = useTransition()
   const [shortUrl, setShortUrl] = useState<string | null>(null)
 
-  const generateShortUrl = async (url: string) => {
+  const generateShortUrl = async () => {
     const shortCode = Math.random().toString(36).substring(2, 15)
     const shortUrl = `${EnvConfig().NEXT_PUBLIC_APP_URL}/${shortCode}`
     setShortUrl(shortUrl)
@@ -23,14 +23,13 @@ export function ShortenerCard() {
     const formData = new FormData(event.currentTarget)
     const url = formData.get('url') as string
 
-    console.log(url)
     if (!url) {
       toast.error('Please enter a URL to shorten.')
       return
     }
     startTransition(() => {
       setTimeout(() => {
-        generateShortUrl(url)
+        generateShortUrl()
       }, 3000) // Simulate a network request
     })
   }

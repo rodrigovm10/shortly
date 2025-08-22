@@ -1,6 +1,4 @@
-import { Separator } from '@/shared/components/ui/separator'
 import { ShortenerCard } from './shortener-card'
-import { MoreFeatures } from './more-features'
 
 export function CallToAction() {
   return (

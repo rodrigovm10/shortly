@@ -11,7 +11,12 @@ export function ExportJSON() {
   const [isPending, startTransition] = useTransition()
 
   const exportLinks = async () => {
-    const [_, links] = await retrieveLinks()
+    const [error, links] = await retrieveLinks()
+
+    if (error) {
+      toast.error(error)
+      return
+    }
 
     if (!links) {
       toast.error('No links found to export')

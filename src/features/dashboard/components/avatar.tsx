@@ -1,7 +1,12 @@
 'use client'
 
+import Link from 'next/link'
+import { toast } from 'sonner'
+import { useTransition } from 'react'
+import { redirect } from 'next/navigation'
 import { signOut } from '@/features/auth/actions/auth'
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar'
+import { Bug, Home, LayoutDashboard, LogOut, Settings } from 'lucide-react'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,11 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
-import { Bug, CircleUserRound, Home, LayoutDashboard, LogOut, Settings } from 'lucide-react'
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import { useTransition } from 'react'
-import { toast } from 'sonner'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar'
 
 interface Props {
   user: {
