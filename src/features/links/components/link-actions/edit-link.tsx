@@ -43,7 +43,6 @@ export function EditLink({ link }: Props) {
   const form = useForm<EditLinkSchema>({
     resolver: zodResolver(editLinkSchema),
     defaultValues: {
-      shortLink: link.short_code ?? '',
       originalUrl: link.original_url ?? '',
       description: link.description ?? '',
     },
@@ -98,22 +97,6 @@ export function EditLink({ link }: Props) {
                   <FormControl>
                     <Input
                       placeholder='https://'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='shortLink'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className='font-semibold'>Destination URL:</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='my link'
                       {...field}
                     />
                   </FormControl>
