@@ -18,16 +18,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
+import { EnvConfig } from '@/shared/config/envs'
 
 interface Props {
   link: Link
 }
 
 export function CopyLink({ link }: Props) {
-  const qrCodeUrl = `${window.location.origin}/${link.short_code}`
-  const handleCopy = () => {
-    copyLink(link)
-  }
+  const qrCodeUrl = `${EnvConfig().NEXT_PUBLIC_APP_URL}/${link.short_code}`
+
+  const handleCopy = () => copyLink(link)
 
   return (
     <Dialog>
@@ -69,7 +69,7 @@ export function CopyLink({ link }: Props) {
             size={200}
             className='rounded-md shadow-md bg-muted p-4'
           />
-          <p className='text-sm text-muted-foreground'>{qrCodeUrl}</p>
+          <p className='text-sm text-muted-foreground text-center'>{qrCodeUrl}</p>
         </div>
       </DialogContent>
     </Dialog>
