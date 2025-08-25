@@ -30,6 +30,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Loader, Rocket, Settings } from 'lucide-react'
 import { Textarea } from '@/shared/components/ui/textarea'
 import { useLinkStore } from '../../provider/link-provider'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 
 interface Props {
   link: Link
@@ -72,12 +73,21 @@ export function EditLink({ link }: Props) {
       open={isOpen}
       onOpenChange={setIsOpen}
     >
-      <DialogTrigger
-        asChild
-        className='cursor-pointer'
-      >
-        <Settings size={14} />
-      </DialogTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DialogTrigger
+            asChild
+            className='cursor-pointer'
+          >
+            <button className='cursor-pointer hover:opacity-70 transition-opacity'>
+              <Settings size={14} />
+            </button>
+          </DialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Edit link</p>
+        </TooltipContent>
+      </Tooltip>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit a Link</DialogTitle>
