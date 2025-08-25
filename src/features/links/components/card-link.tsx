@@ -7,6 +7,12 @@ import { ShareLink } from './link-actions/share-link'
 import { DeleteLink } from './link-actions/delete-link'
 import { CopyLinkShortCode } from './copy-link-short-code'
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/shared/components/ui/collapsible'
+import { ArrowDown, ChevronDown } from 'lucide-react'
 
 interface Props {
   link: Link
@@ -32,11 +38,21 @@ export function CardLink({ link }: Props) {
         </section>
       </CardContent>
       <CardFooter className='flex justify-between'>
-        <InfoLink
-          link={link}
-          className='md:hidden '
-        />
-        <span className='text-xs text-muted-foreground font-semibold'>
+        <Collapsible className='block md:hidden'>
+          <CollapsibleTrigger className='flex items-center cursor-pointer gap-2'>
+            <ChevronDown size={12} />
+            <p className='text-xs text-muted-foreground font-semibold'>Info</p>
+          </CollapsibleTrigger>
+          <CollapsibleContent className='flex flex-col gap-2 mt-4'>
+            <InfoLink
+              link={link}
+              className='md:hidden '
+            />
+            <p className='text-xs text-muted-foreground '>{link?.description}</p>
+          </CollapsibleContent>
+        </Collapsible>
+        <p className='text-xs text-muted-foreground hidden md:block'>{link?.description}</p>
+        <span className='text-xs text-muted-foreground font-semibold self-start'>
           {new Date(link.created_at).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'long',
