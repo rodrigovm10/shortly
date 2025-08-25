@@ -9,7 +9,7 @@ export async function Header() {
   const user = await getUser()
 
   return (
-    <header className='h-16 flex items-center justify-between px-6 border-b'>
+    <header className='h-16 flex items-center justify-between px-6 md:border-b'>
       <Link
         href='/'
         className='group'

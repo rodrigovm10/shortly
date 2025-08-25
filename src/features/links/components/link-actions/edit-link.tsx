@@ -30,6 +30,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Loader, Rocket, Settings } from 'lucide-react'
 import { Textarea } from '@/shared/components/ui/textarea'
 import { useLinkStore } from '../../provider/link-provider'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 
 interface Props {
   link: Link
@@ -43,7 +44,6 @@ export function EditLink({ link }: Props) {
   const form = useForm<EditLinkSchema>({
     resolver: zodResolver(editLinkSchema),
     defaultValues: {
-      shortLink: link.short_code ?? '',
       originalUrl: link.original_url ?? '',
       description: link.description ?? '',
     },
@@ -73,12 +73,21 @@ export function EditLink({ link }: Props) {
       open={isOpen}
       onOpenChange={setIsOpen}
     >
-      <DialogTrigger
-        asChild
-        className='cursor-pointer'
-      >
-        <Settings size={14} />
-      </DialogTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DialogTrigger
+            asChild
+            className='cursor-pointer'
+          >
+            <button className='cursor-pointer hover:opacity-70 transition-opacity'>
+              <Settings size={14} />
+            </button>
+          </DialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Edit link</p>
+        </TooltipContent>
+      </Tooltip>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit a Link</DialogTitle>
@@ -98,22 +107,6 @@ export function EditLink({ link }: Props) {
                   <FormControl>
                     <Input
                       placeholder='https://'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='shortLink'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className='font-semibold'>Destination URL:</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='my link'
                       {...field}
                     />
                   </FormControl>

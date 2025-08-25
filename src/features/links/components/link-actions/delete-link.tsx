@@ -17,6 +17,7 @@ import {
 import { Loader, Trash } from 'lucide-react'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 
 interface Props {
   link: {
@@ -67,9 +68,18 @@ export function DeleteLink({ link }: Props) {
       open={isOpen}
       onOpenChange={setIsOpen}
     >
-      <DialogTrigger className='cursor-pointer'>
-        <Trash size={14} />
-      </DialogTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DialogTrigger asChild>
+            <button className='cursor-pointer hover:opacity-70 transition-opacity'>
+              <Trash size={14} />
+            </button>
+          </DialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Delete link</p>
+        </TooltipContent>
+      </Tooltip>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure to want to delete the link?</DialogTitle>

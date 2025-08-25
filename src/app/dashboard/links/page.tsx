@@ -19,10 +19,6 @@ export default async function LinksPage() {
   return (
     <section>
       <LinkStoreProvider links={links!}>
-        <TitleDescription
-          title='Links Page'
-          description='This is the links page of the dashboard.'
-        />
         <LinkPageContent />
       </LinkStoreProvider>
     </section>
