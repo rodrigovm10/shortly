@@ -1,6 +1,7 @@
 import { Link } from '@/shared/types/database'
 
 import { InfoLink } from './info-link'
+import { ChevronDown } from 'lucide-react'
 import { CopyLink } from './link-actions/copy-link'
 import { EditLink } from './link-actions/edit-link'
 import { ShareLink } from './link-actions/share-link'
@@ -12,7 +13,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/shared/components/ui/collapsible'
-import { ArrowDown, ChevronDown } from 'lucide-react'
 
 interface Props {
   link: Link
