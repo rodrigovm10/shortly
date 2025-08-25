@@ -33,14 +33,13 @@ export const createLinkStore = (initState: LinkState = defaultInitState) => {
     updateLink: (id: string, link: EditLinkSchema) => {
       set(state => ({
         links: state.links.map(item => {
-          const { description, originalUrl, shortLink } = link
+          const { description, originalUrl } = link
 
           if (item.id === id) {
             return {
               ...item,
               description: description ?? null,
               original_url: originalUrl,
-              short_code: shortLink,
             }
           }
           return item

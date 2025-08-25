@@ -6,7 +6,6 @@ import { Export } from '@/features/settings/components/cards/export'
 import { General } from '@/features/settings/components/cards/general'
 import { Identities } from '@/features/settings/components/cards/identities'
 import { DangerZone } from '@/features/settings/components/cards/danger-zone'
-import { TitleDescription } from '@/shared/components/title-description'
 
 export const metadata: Metadata = {
   title: 'Shortly - Settings',

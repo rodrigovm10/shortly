@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { retrieveLinks } from '@/features/links/actions/retrieve-links'
-import { TitleDescription } from '@/shared/components/title-description'
 import { LinkStoreProvider } from '@/features/links/provider/link-provider'
 import { LinkPageContent } from '@/features/links/components/link-page-content'
 

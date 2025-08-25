@@ -16,13 +16,12 @@ export const editLink = async (
     return [userError, undefined]
   }
 
-  const { originalUrl, shortLink, description } = link
+  const { originalUrl, description } = link
 
   const { data, error } = await supabase
     .from('urls')
     .update({
       original_url: originalUrl,
-      short_code: shortLink,
       description: description,
     })
     .eq('id', linkId)
