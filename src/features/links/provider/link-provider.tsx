@@ -17,7 +17,7 @@ export interface LinkStoreProviderProps {
 export const LinkStoreProvider = ({ children, links }: LinkStoreProviderProps) => {
   const storeRef = useRef<LinkStoreApi | null>(null)
   if (storeRef.current === null) {
-    storeRef.current = createLinkStore({ links })
+    storeRef.current = createLinkStore({ links, search: '', status: 'ALL' })
   }
 
   return <LinkStoreContext.Provider value={storeRef.current}>{children}</LinkStoreContext.Provider>

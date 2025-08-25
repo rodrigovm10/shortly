@@ -16,15 +16,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/
 export type StatusFilter = 'ALL' | Status
 
 export function LinkPageContent() {
-  const { links, searchLink, selectLink } = useLinkStore(state => state)
+  const { setSearch, setStatus, getFilteredLinks } = useLinkStore(state => state)
+  const filteredLinks = getFilteredLinks()
 
-  const handleSearchFilter = (search: string) => {
-    searchLink(search)
-  }
-
-  const handleSelectFilter = (filter: StatusFilter) => {
-    selectLink(filter)
-  }
+  const handleSearchFilter = (search: string) => setSearch(search)
+  const handleSelectFilter = (filter: StatusFilter) => setStatus(filter)
 
   return (
     <>
@@ -40,17 +36,17 @@ export function LinkPageContent() {
                 className={cn(buttonVariants({ variant: 'outline' }), 'text-xs hover:text-white')}
               >
                 <Boxes size={14} />
-                {links.length}/{MAX_LINKS}
+                {filteredLinks?.length}/{MAX_LINKS}
               </span>
             </TooltipTrigger>
             <TooltipContent>
-              <p>You have {links.length} links. You can create up to 30 links.</p>
+              <p>You have {filteredLinks?.length} links. You can create up to 30 links.</p>
             </TooltipContent>
           </Tooltip>
           <CreateLink />
         </div>
       </section>
-      {links.length > 0 ? <ListLinks links={links} /> : <NoFoundLinks />}
+      {filteredLinks.length > 0 ? <ListLinks links={filteredLinks} /> : <NoFoundLinks />}
     </>
   )
 }
