@@ -3,6 +3,7 @@ import { Link } from '@/shared/types/database'
 import { InfoLink } from './info-link'
 import { CopyLink } from './link-actions/copy-link'
 import { EditLink } from './link-actions/edit-link'
+import { ShareLink } from './link-actions/share-link'
 import { DeleteLink } from './link-actions/delete-link'
 import { CopyLinkShortCode } from './copy-link-short-code'
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card'
@@ -24,6 +25,7 @@ export function CardLink({ link }: Props) {
             link={link}
             className='hidden md:flex'
           />
+          <ShareLink link={link} />
           <CopyLink link={link} />
           <EditLink link={link} />
           <DeleteLink link={{ id: link.id, shortCode: link.short_code }} />
