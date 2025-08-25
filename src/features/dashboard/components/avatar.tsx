@@ -82,10 +82,6 @@ export function UserAvatar({ user }: Props) {
           </DropdownMenuItem>
         </Link>
 
-        {/* <DropdownMenuItem className='cursor-pointer'>
-          <CircleUserRound />
-          Contact
-        </DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='cursor-pointer'
