@@ -14,7 +14,7 @@ export function Menu() {
   const pathname = usePathname()
 
   return (
-    <div className='flex gap-4 mb-4 md:hidden w-screen border-b'>
+    <div className='flex gap-4 mb-4 md:hidden border-b'>
       {links.map(link => (
         <Link
           key={link.id}

@@ -17,7 +17,7 @@ export function CardLink({ link }: Props) {
       <CardContent className='flex justify-between '>
         <section className=''>
           <CopyLinkShortCode link={link} />
-          <p className='text-sm text-muted-foreground font-bold'>{link.original_url}</p>
+          <p className='text-sm text-muted-foreground font-bold break-all'>{link.original_url}</p>
         </section>
         <section className='flex gap-4 items-start '>
           <InfoLink
